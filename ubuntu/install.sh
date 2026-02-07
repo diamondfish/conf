@@ -124,11 +124,11 @@ for choice in $CHOICES; do
     if declare -f "$INSTALL_FUNC" > /dev/null; then
         echo "→ Installing '$choice' configuration..."
         # Call the installation function
-        if ! $INSTALL_FUNC; then
+        if $INSTALL_FUNC; then
+            echo "✓ Done"
+        else
             echo "✗ Installation failed"
             FAILED_COUNT=$((FAILED_COUNT + 1))
-        else
-            echo "✓ Done"
         fi
     else
         echo "⚠ Warning: No installation function found for '$choice'"
