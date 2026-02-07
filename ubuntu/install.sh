@@ -19,8 +19,10 @@ OPTIONS=(
 # Installation Functions
 # -----------------------------------------------------------------------------
 bash_aliases_install() {
-    download "$REPO_URL/.bash_aliases" ~/.bash_aliases && \
+    download "$REPO_URL/.bash_aliases_fisk" ~/.bash_aliases
+    echo "lol"
     source ~/.bash_aliases 2>/dev/null
+    echo "tjena"
 }
 
 tmux_install() {
