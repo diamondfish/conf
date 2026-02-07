@@ -55,12 +55,12 @@ actcheckbox=black,green
 download() {
     local source_url="$1"
     local target_path="$2"
-    echo "→ Downloading $source_url to $target_path"
+    # echo "→ Downloading $source_url to $target_path"
     if curl -fsSL "$source_url" -o "$target_path"; then
-        echo "✓ Download successful"
+        # echo "✓ Download successful"
         return 0
     else
-        echo "✗ Download failed"
+        echo "✗ Download failed: $source_url"
         return 1
     fi
 }
@@ -119,8 +119,10 @@ for choice in $CHOICES; do
     # Check if the installation function exists
     INSTALL_FUNC="${choice}_install"
     if declare -f "$INSTALL_FUNC" > /dev/null; then
+        echo "→ Installing '$choice' configuration..."
         # Call the installation function
         if ! $INSTALL_FUNC; then
+            echo "✗ Installation failed for '$choice'"
             FAILED_COUNT=$((FAILED_COUNT + 1))
         fi
     else
