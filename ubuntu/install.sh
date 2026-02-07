@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Interactive installer for configuration files
 # To run directly from GitHub:
 # bash <(curl -fsSL https://raw.githubusercontent.com/diamondfish/conf/master/ubuntu/install_interactive_v2.sh)
