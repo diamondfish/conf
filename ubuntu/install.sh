@@ -58,7 +58,8 @@ download() {
     local source_url="$1"
     local target_path="$2"
     # echo "→ Downloading $source_url to $target_path"
-    if curl -fsSL "$source_url" -o "$target_path"; then
+    # if curl -fsSL "$source_url" -o "$target_path"; then
+    if curl -fsSL -H "Cache-Control: no-cache" -H "Pragma: no-cache" "$source_url" -o "$target_path"; then
         # echo "✓ Download successful"
         return 0
     else
