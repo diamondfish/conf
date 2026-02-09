@@ -5,6 +5,8 @@
 # bash <(curl -fsSL https://raw.githubusercontent.com/diamondfish/conf/master/ubuntu/install_interactive_v2.sh)
 # curl -fsSL https://raw.githubusercontent.com/diamondfish/conf/master/ubuntu/install.sh | bash
 
+set -e
+
 REPO_URL="https://raw.githubusercontent.com/diamondfish/conf/master/ubuntu"
 
 # -----------------------------------------------------------------------------
@@ -19,11 +21,8 @@ OPTIONS=(
 # Installation Functions
 # -----------------------------------------------------------------------------
 bash_aliases_install() {
-    set -e
-    download "$REPO_URL/.bash_aliases_fisk" ~/.bash_aliases
-    echo "lol"
+    download "$REPO_URL/.bash_aliases" ~/.bash_aliases
     source ~/.bash_aliases 2>/dev/null
-    echo "tjena"
 }
 
 tmux_install() {
@@ -64,7 +63,8 @@ download() {
         return 0
     else
         echo "✗ Download failed: $source_url"
-        return 1
+        # return 1
+        exit 1
     fi
 }
 
