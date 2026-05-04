@@ -2,9 +2,9 @@
 
 # Interactive installer for configuration files
 # To run directly from GitHub:
+# curl -fsSL https://raw.githubusercontent.com/diamondfish/conf/master/ubuntu/install.sh | source /dev/stdin
 # source <(curl -fsSL https://raw.githubusercontent.com/diamondfish/conf/master/ubuntu/install.sh)
 # curl -fsSL https://raw.githubusercontent.com/diamondfish/conf/master/ubuntu/install.sh | bash
-# curl -fsSL https://raw.githubusercontent.com/diamondfish/conf/master/ubuntu/install.sh | source /dev/stdin
 
 set -e
 
@@ -24,11 +24,14 @@ OPTIONS=(
 bash_aliases_install() {
     download "$REPO_URL/.bash_aliases" ~/.bash_aliases
     source ~/.bash_aliases 2>/dev/null
-    # echo "To apply bash aliases, run: source ~/.bash_aliases"
+    echo "To activate the configuration in the current shell:"
+    echo "source ~/.bash_aliases"
 }
 
 tmux_install() {
     download "$REPO_URL/tmux/.tmux.conf" ~/.tmux.conf
+    echo "To activate the configuration for active tmux sessions:"
+    echo "tmux source-file ~/.tmux.conf"
 }
 
 # -----------------------------------------------------------------------------
