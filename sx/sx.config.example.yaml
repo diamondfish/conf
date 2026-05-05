@@ -1,0 +1,52 @@
+# sx — saved SSH sessions
+
+# Behavior options.
+#   close-current-tab  When true, the tab where you ran `sx` is closed after
+#                      the new SSH tab opens (so it visually feels like the
+#                      tab was replaced). Defaults to false. Has no effect
+#                      when sx is run outside Windows Terminal.
+options:
+  close-current-tab: false
+
+# SSH key aliases. Reference by name in the session's `ssh-key` field.
+# Paths support ~ which expands to your user profile.
+#
+# Special alias:
+#   default  Used by sessions that don't specify `ssh-key`. If you don't
+#            define `default` here, sx falls back to ~/.ssh/id_rsa.
+keys:
+  default: ~/.ssh/id_rsa
+  sshJohan: ~/.ssh/id_rsa_johan
+  # sshWork: ~/.ssh/id_rsa_work
+
+# Tab color rules.
+#   - A session's explicit `color:` always wins.
+#   - Otherwise the first `match` rule whose `pattern` is contained in the
+#     session name is used (substring match, evaluated in order).
+#   - If no rule matches, `default` is used.
+#   - If neither `default` nor a matching rule is set, no tab color is
+#     applied (Windows Terminal keeps its own default).
+# Remove this whole `colors:` block to opt out of tab coloring entirely.
+colors:
+  default: "#808080"
+  match:
+    - pattern: "-dev"
+      color: "#1E90FF"
+    - pattern: "-prod"
+      color: "#2E8B57"
+
+# Sessions. The session key (e.g. `acme-prod`) becomes the tab title.
+#
+# Fields per session:
+#   host     (required)  hostname or IP
+#   port     (optional)  defaults to 22
+#   user     (optional)  ssh user
+#   ssh-key  (optional)  alias from `keys:` above, or a direct path.
+#                        If omitted, ~/.ssh/id_rsa is used when it exists.
+#   color    (optional)  hex like "#ff8800" overrides any rule from `colors:`
+sessions:
+  acme-prod:
+    host: acme.example.io
+    port: 2222
+    user: john
+    color: "#ff8800"
